@@ -6,10 +6,10 @@ customCaCertUsed: false
 caCertSecretName: &caCertSecretName "cluster-ca-secret"
 
 # https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets
-# should be defined only if customCaCertUsed is set to false
-customCaCertSecretData:
-  certificate: b64encodedstring
-  key: b64encodedstring
+# should be defined only if customCaCertUsed is set to true
+# customCaCertSecretData:
+#   tls.crt: b64encodedstring
+#   tls.key: b64encodedstring
 
 # CA certificate name, common name, and private key params
 # should be defined only if customCaCertUsed is set to false
