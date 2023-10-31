@@ -35,9 +35,10 @@ jobs:
                      --workdir /data \
                      ${DOCKER_IMAGE_HELM} template chart | tee ${MANIFEST_OUTPUT_FILE_NAME}
 
-      - name: Validate manifests
-        run: |
-          docker run --rm \
-                     -v "$(pwd):/data" \
-                     --workdir /data \
-                     ${DOCKER_IMAGE_KUBECONFORM} -debug -output json -summary ${MANIFEST_OUTPUT_FILE_NAME}
+      # commenting out because of https://github.com/yannh/kubeconform#limits-of-kubeconform-validation
+      # - name: Validate manifests
+      #   run: |
+      #     docker run --rm \
+      #                -v "$(pwd):/data" \
+      #                --workdir /data \
+      #                ${DOCKER_IMAGE_KUBECONFORM} -debug -output json -summary ${MANIFEST_OUTPUT_FILE_NAME}
