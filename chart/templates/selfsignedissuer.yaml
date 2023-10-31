@@ -1,0 +1,15 @@
+---
+{{- if not .Values.customCaCertUsed }}
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: {{ .Values.selfSignedClusterIssuer.name | quote }}
+  annotations:
+    "helm.sh/hook-weight": "0"
+    {{- include "common.annotations" .Chart | nindent 4 }}
+  labels:
+    {{- include "common.labels" .Chart | nindent 4 }}
+    {{- include "common.labelsrelease" .Release | nindent 4 }}
+spec:
+  {{- .Values.selfSignedClusterIssuer.spec | toYaml | nindent 2 }}
+{{- end }}

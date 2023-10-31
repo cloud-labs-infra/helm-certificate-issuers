@@ -1,0 +1,9 @@
+The {{ .Chart.Name }} chart created the following objects:
+
+{{- if not .Values.customCaCertUsed }}
+- Self-signed cluster-wide CA issuer {{ .Values.selfSignedClusterIssuer.name }}
+- Certificate {{ .Values.caCertName  }} stored in {{ .Values.caCertSecretName }} secret in {{ .Release.Namespace }} namespace
+{{- else }}
+- Secret {{ .Values.caCertSecretName }} with a custom CA certificate in {{ .Release.Namespace }} namespace
+{{- end }}
+- Cluster-wide CA issuer {{ .Values.prodClusterIssuer.name }}

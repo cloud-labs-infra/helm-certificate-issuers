@@ -1,0 +1,13 @@
+---
+apiVersion: v2
+name: certificate-issuer
+# version will be changed by ci
+version: v1.0.0
+description: Helm chart for deploying cluster-wide certificate issuer
+type: application
+home: "https://github.com/cloud-labs-infra/helm-namespaces"
+maintainers:
+  - name: David Kurasov
+    url: "https://github.com/tg-bot-gurus"
+  - name: Egor Vasilyev
+    url: "https://github.com/bissquit"
