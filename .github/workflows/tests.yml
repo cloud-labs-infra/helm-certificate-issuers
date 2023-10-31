@@ -1,0 +1,43 @@
+name: "Run tests"
+
+on:
+  push:
+    branches-ignore:
+      - main
+  workflow_call:
+  workflow_dispatch:
+
+env:
+  DOCKER_IMAGE_HELM: alpine/helm:3.12.3
+  DOCKER_IMAGE_KUBECONFORM: ghcr.io/yannh/kubeconform:latest-alpine
+  MANIFEST_OUTPUT_FILE_NAME: k8s-objects.yaml
+
+jobs:
+  run-linters:
+    name: "Run linters"
+    runs-on: ubuntu-20.04
+    container: alpine/helm:3.12.3
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run linters
+        run: |
+          helm lint chart/
+
+  run-k8s-validation:
+    name: "Run manifest validation"
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Generate manifests
+        run: |
+          docker run --rm \
+                     -v "$(pwd):/data" \
+                     --workdir /data \
+                     ${DOCKER_IMAGE_HELM} template chart | tee ${MANIFEST_OUTPUT_FILE_NAME}
+
+      - name: Validate manifests
+        run: |
+          docker run --rm \
+                     -v "$(pwd):/data" \
+                     --workdir /data \
+                     ${DOCKER_IMAGE_KUBECONFORM} -debug -output json -summary ${MANIFEST_OUTPUT_FILE_NAME}
