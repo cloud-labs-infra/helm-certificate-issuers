@@ -9,7 +9,7 @@ metadata:
   {{- template "common.labels" $ }}
   annotations:
     "helm.sh/hook-weight": "1"
-    {{- include "common.annotations" $.Chart | nindent 4 }}
+    {{- include "common.annotations" $ | nindent 4 }}
 spec:
   isCA: true
   commonName: {{ .commonName | quote }}
