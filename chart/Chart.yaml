@@ -11,3 +11,7 @@ maintainers:
     url: "https://github.com/tg-bot-gurus"
   - name: Egor Vasilyev
     url: "https://github.com/bissquit"
+dependencies:
+  - name: cert-manager
+    version: v1.13.1
+    repository: https://charts.jetstack.io
