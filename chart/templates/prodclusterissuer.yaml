@@ -4,7 +4,7 @@ kind: ClusterIssuer
 metadata:
   name: {{ .Values.prodClusterIssuer.name | quote }}
   labels:
-    {{- include "common.labels" .Chart | nindent 4 }}
-    {{- include "common.labelsrelease" .Release | nindent 4 }}
+  {{- include "common.labels" . | nindent 4 }}
 spec:
-  {{- .Values.prodClusterIssuer.spec | toYaml | nindent 2 }}
+  ca:
+    secretName: {{ .Values.caCertSecretName | quote }}

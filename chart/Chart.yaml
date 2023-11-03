@@ -5,9 +5,11 @@ name: certificate-issuer
 version: v1.0.0
 description: Helm chart for deploying cluster-wide certificate issuer
 type: application
-home: "https://github.com/cloud-labs-infra/helm-namespaces"
+home: "https://github.com/cloud-labs-infra/helm-certificate-issuers"
 maintainers:
   - name: David Kurasov
     url: "https://github.com/tg-bot-gurus"
-  - name: Egor Vasilyev
-    url: "https://github.com/bissquit"
+dependencies:
+  - name: cert-manager
+    version: v1.13.1
+    repository: https://charts.jetstack.io

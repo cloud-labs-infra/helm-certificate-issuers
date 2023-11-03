@@ -3,22 +3,23 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ .Values.caCertificate.name | quote }}
-  namespace: {{ .Release.Namespace | quote }}
+  {{- with .Values.caCertificate }}
+  name: {{ .name | quote }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+  {{- include "common.labels" $ | nindent 4 }}
   annotations:
     "helm.sh/hook-weight": "1"
-    {{- include "common.annotations" .Chart | nindent 4 }}
-  labels:
-    {{- include "common.labels" .Chart | nindent 4 }}
-    {{- include "common.labelsrelease" .Release | nindent 4 }}
+    {{- include "common.annotations" $ | nindent 4 }}
 spec:
   isCA: true
-  commonName: {{ .Values.caCertificate.commonName | quote }}
-  secretName: {{ .Values.caCertSecretName | quote }}
+  commonName: {{ .commonName | quote }}
+  secretName: {{ $.Values.caCertSecretName | quote }}
   privateKey:
-  {{- .Values.caCertificate.privateKey | toYaml | nindent 4 }}
+  {{- .privateKey | toYaml | nindent 4 }}
   issuerRef:
-    name: {{ .Values.selfSignedClusterIssuer.name | quote }}
+    name: {{ $.Values.selfSignedClusterIssuer.name | quote }}
     kind: ClusterIssuer
     group: cert-manager.io
+  {{- end }}
 {{- end }}
