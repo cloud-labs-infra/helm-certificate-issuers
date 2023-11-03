@@ -12,6 +12,6 @@ To go this way, make sure to set the value of `customCaCertUsed` to `false` in t
 Please make sure that `customCaCertUsed` is set to `true` and `tls.crt` & `tls.key` keys of `customCaCertSecretData`
 are supplied with base64-encoded strings of the actual cert and its key.
 
-Please note that certificate issuers are cluster-wide, meaning they do not belong to any namspace.
+Please note that certificate issuers are cluster-wide, meaning they do not belong to any namespace.
 Whereas, Certificate and Secret objects are namespaced. Please specify a proper namespace when deploying this chart via the `--namespace` option.
 Based on the aforementioned vendor's docs, `cert-manager` is considered a proper namespace for these objects.
