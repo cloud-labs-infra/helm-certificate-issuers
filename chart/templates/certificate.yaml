@@ -5,8 +5,9 @@ kind: Certificate
 metadata:
   {{- with .Values.caCertificate }}
   name: {{ .name | quote }}
-  namespace: {{ $.Release.Namespace | quote }}
-  {{- template "common.labels" $ }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+  {{- include "common.labels" $ | nindent 4 }}
   annotations:
     "helm.sh/hook-weight": "1"
     {{- include "common.annotations" $ | nindent 4 }}

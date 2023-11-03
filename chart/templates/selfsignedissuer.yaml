@@ -5,7 +5,8 @@ kind: ClusterIssuer
 metadata:
   {{- with .Values.selfSignedClusterIssuer }}
   name: {{ .name | quote }}
-  {{- template "common.labels" $ }}
+  labels:
+  {{- include "common.labels" $ | nindent 4 }}
   annotations:
     "helm.sh/hook-weight": "0"
     {{- include "common.annotations" $ | nindent 4 }}
