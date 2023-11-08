@@ -13,3 +13,4 @@ dependencies:
   - name: cert-manager
     version: v1.13.1
     repository: https://charts.jetstack.io
+    condition: certManagerChart.enabled
