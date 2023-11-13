@@ -30,3 +30,6 @@ selfSignedClusterIssuer:
 # config of cluster-wide self-signed issuer
 prodClusterIssuer:
   name: cluster-ca-issuer
+
+certManagerChart:
+  enabled: false
